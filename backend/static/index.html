@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faro, panel de ubicación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  /* ------------------------------------------------------------------
+     Sistema visual "carta náutica": papel de carta, tinta azul marino y
+     el magenta con el que las cartas y los GPS marcan faros y rutas.
+     ------------------------------------------------------------------ */
+  :root {
+    --ink: #0F2A3D;        /* tinta: texto principal y cabecera */
+    --ink-2: #48606F;      /* texto secundario */
+    --ink-3: #7A8D98;      /* texto terciario / marcas */
+    --paper: #F3F6F4;      /* papel de carta: fondo de la consola */
+    --surface: #FFFFFF;
+    --water: #DCE9EF;      /* agua somera: selección y hover */
+    --line: #CBD7DD;
+    --magenta: #C2187A;    /* ruta y faro: el único color de acento */
+    --magenta-dark: #9C1161;
+    --magenta-tint: #FBE6F2;
+    --green: #1E7B4F;  --green-tint: #DFF2E8;
+    --amber: #9A5B00;  --amber-tint: #FBEED3;
+    --red: #B93424;    --red-tint: #FBE4E0;
+    --font: "Barlow", "Segoe UI", system-ui, sans-serif;
+    --display: "Barlow Condensed", "Barlow", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font: 400 15px/1.45 var(--font); color: var(--ink); background: var(--paper); }
+  button, input, select { font: inherit; color: inherit; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  /* ---------- Controles ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 40px; padding: 0 16px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--magenta); background: var(--magenta); color: #fff; font-weight: 600;
+  }
+  .btn:hover { background: var(--magenta-dark); border-color: var(--magenta-dark); }
+  .btn.quiet { background: var(--surface); color: var(--ink); border-color: var(--line); }
+  .btn.quiet:hover { background: var(--water); border-color: var(--ink-3); }
+  .btn.danger { background: var(--surface); color: var(--red); border-color: var(--red); }
+  .btn.danger:hover { background: var(--red-tint); }
+  .btn.sm { min-height: 32px; padding: 0 12px; font-size: 14px; }
+  .btn.block { width: 100%; }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .field { display: block; margin-bottom: 12px; }
+  .field > span { display: block; font-size: 13px; font-weight: 500; color: var(--ink-2); margin-bottom: 4px; }
+  .input {
+    width: 100%; min-height: 40px; padding: 0 12px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--surface);
+  }
+  .input:focus { outline: 2px solid var(--ink); outline-offset: 0; border-color: var(--ink); }
+  .note { font-size: 13px; color: var(--ink-2); margin: 6px 0 0; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 99px; background: var(--water); color: var(--ink-2); white-space: nowrap; }
+  .pill.pending { background: var(--amber-tint); color: var(--amber); }
+  .pill.accepted { background: var(--green-tint); color: var(--green); }
+  .pill.rejected, .pill.revoked { background: var(--red-tint); color: var(--red); }
+
+  /* ---------- Marca: el punto del faro con sus dos anillos ---------- */
+  .mark { width: 30px; height: 30px; flex: none; }
+  .brand { display: flex; align-items: center; gap: 10px; font: 600 24px/1 var(--display); letter-spacing: .01em; }
+
+  /* ================== Pantalla de entrada ================== */
+  .login {
+    position: fixed; inset: 0; z-index: 2000; overflow: hidden auto; color: #fff;
+    display: grid; grid-template-columns: minmax(0, 460px) 1fr; background: var(--ink);
+  }
+  /* Mar de noche con anillos de alcance centrados en el faro */
+  .sea {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      repeating-radial-gradient(circle at 72% 46%, transparent 0 89px, rgba(255,255,255,.055) 89px 90px),
+      radial-gradient(circle at 72% 46%, #1B4560 0, #0F2A3D 55%, #0A1E2C 100%);
+  }
+  /* El haz: único movimiento decorativo de toda la interfaz */
+  .beam {
+    position: absolute; left: 72%; top: 46%; width: 240vmax; height: 240vmax; margin: -120vmax 0 0 -120vmax;
+    background: conic-gradient(from 0deg, rgba(255,205,232,0) 0deg, rgba(255,205,232,.20) 16deg, rgba(255,205,232,0) 34deg, rgba(255,205,232,0) 360deg);
+    animation: sweep 16s linear infinite;
+  }
+  .lamp { position: absolute; left: 72%; top: 46%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: #FFD3EA; box-shadow: 0 0 0 6px rgba(194,24,122,.55), 0 0 60px 18px rgba(255,160,214,.45); }
+  @keyframes sweep { to { transform: rotate(360deg); } }
+  .login-card { position: relative; align-self: center; padding: 48px 44px; }
+  .login-card h1 { font: 600 44px/1.05 var(--display); margin: 36px 0 14px; max-width: 11ch; }
+  .login-card .lead { color: #C5D3DC; margin: 0 0 28px; max-width: 38ch; }
+  .login-card .field > span { color: #C5D3DC; }
+  .login-card .input { border-color: transparent; color: var(--ink); min-height: 46px; font-size: 17px; }
+  .login-card .input:focus { outline-color: #FFD3EA; }
+  .login-card .btn { min-height: 46px; font-size: 16px; }
+  .login-card .linklike { background: none; border: 0; padding: 0; color: #FFD3EA; text-decoration: underline; cursor: pointer; margin-top: 14px; }
+  .login-card .note { color: #9FB3C0; margin-top: 18px; }
+  .login-error { background: var(--red-tint); color: var(--red); border-radius: 8px; padding: 10px 12px; margin-bottom: 14px; font-weight: 500; }
+
+  /* ================== Aplicación ================== */
+  .shell { display: grid; grid-template-columns: 404px minmax(0, 1fr); height: 100vh; }
+  .console { display: flex; flex-direction: column; min-height: 0; background: var(--paper); border-right: 1px solid var(--line); }
+  .masthead { background: var(--ink); color: #fff; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .session { text-align: right; font-size: 13px; color: #C5D3DC; line-height: 1.3; }
+  .session b { display: block; color: #fff; font-weight: 600; font-size: 14px; }
+  .session button { background: none; border: 0; padding: 0; color: #FFD3EA; text-decoration: underline; cursor: pointer; font-size: 13px; }
+
+  /* Pestañas tipo carpeta: la activa se funde con el papel */
+  .tabs { display: flex; gap: 2px; background: var(--ink); padding: 0 10px; }
+  .tab { flex: 1; position: relative; white-space: nowrap; padding: 10px 4px 11px; border: 0; background: transparent; color: #B4C5D0; font-weight: 600; font-size: 14px; border-radius: 9px 9px 0 0; cursor: pointer; }
+  .tab:hover { color: #fff; }
+  .tab[aria-selected="true"] { background: var(--paper); color: var(--ink); }
+  .tab .count { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 99px; background: var(--magenta); color: #fff; font-size: 12px; line-height: 18px; }
+  .pane { flex: 1; min-height: 0; overflow-y: auto; padding: 4px 18px 28px; }
+  .pane h2 { font: 600 13px/1.3 var(--font); color: var(--ink-2); margin: 22px 0 8px; }
+  .pane p { margin: 0 0 12px; }
+  .empty { color: var(--ink-2); background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 14px; font-size: 14px; }
+
+  /* Personas */
+  .people { display: grid; gap: 6px; }
+  .person { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); cursor: pointer; }
+  .person:hover { background: var(--water); }
+  .person[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 4px 0 0 var(--magenta); }
+  .person .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-3); flex: none; }
+  .person .dot.live { background: var(--green); box-shadow: 0 0 0 3px var(--green-tint); }
+  .person .dot.stale { background: var(--amber); }
+  .person .who { flex: 1; min-width: 0; font-weight: 600; }
+  .person .who small { display: block; font-weight: 400; color: var(--ink-2); font-size: 13px; }
+
+  /* Última señal */
+  .signal { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .signal .addr { font-weight: 600; }
+  .signal dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; margin: 8px 0 0; font-size: 14px; }
+  .signal dt { color: var(--ink-2); }
+  .signal dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+  /* Periodo */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { min-height: 32px; padding: 0 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-size: 14px; font-weight: 500; }
+  .chip:hover { background: var(--water); }
+  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .custom-range { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .custom-range .field { margin: 0; min-width: 0; }
+  .custom-range .btn { grid-column: 1 / -1; }
+
+  /* Cifras del recorrido: separadas por líneas, no por tarjetas */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
+  .stat { padding: 10px 14px 9px; min-width: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); margin: -1px 0 0 -1px; }
+  .stat b { display: block; font: 600 25px/1.1 var(--display); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stat span { font-size: 12px; color: var(--ink-2); }
+  .flag { margin-top: 8px; padding: 9px 12px; border-radius: 8px; background: var(--red-tint); color: var(--red); font-size: 14px; font-weight: 500; }
+
+  /* Línea de tiempo: aquí la secuencia sí es información */
+  .timeline { list-style: none; margin: 0; padding: 0 0 0 7px; }
+  .timeline li { position: relative; padding: 0 0 4px 22px; border-left: 2px solid var(--magenta); }
+  .timeline li:last-child { border-left-color: transparent; }
+  .timeline li.jump { border-left: 2px dashed var(--red); }
+  .timeline li::before { content: ""; position: absolute; left: -7px; top: 9px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 3px solid var(--magenta); box-sizing: border-box; }
+  .timeline li:first-child::before { background: var(--magenta); }
+  .timeline button { display: block; width: 100%; text-align: left; background: none; border: 0; border-radius: 8px; padding: 5px 8px; cursor: pointer; }
+  .timeline button:hover { background: var(--water); }
+  .timeline time { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .timeline small { display: block; color: var(--ink-2); font-size: 13px; }
+  .timeline li.jump small { color: var(--red); font-weight: 500; }
+
+  /* Zona */
+  .zone-status { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; }
+  .zone-status.in { background: var(--green-tint); border-color: var(--green); color: var(--green); }
+  .zone-status.out { background: var(--red-tint); border-color: var(--red); color: var(--red); }
+  .range-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .range-row input[type=range] { flex: 1; accent-color: var(--magenta); }
+  .range-row output { font: 600 20px/1 var(--display); min-width: 74px; text-align: right; font-variant-numeric: tabular-nums; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .log { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .log li { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: 8px; padding: 8px 12px; font-size: 14px; }
+  .log li.enter { border-left-color: var(--green); }
+  .log li small { display: block; color: var(--ink-2); }
+
+  /* Permisos */
+  .consent { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 6px; }
+  .consent .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-weight: 600; }
+  .consent small { color: var(--ink-2); font-size: 13px; }
+  .consent .row { margin-top: 10px; }
+  .inline-form { display: flex; gap: 8px; }
+  .inline-form .input { flex: 1; min-width: 0; }
+
+  /* ---------- Mapa ---------- */
+  .stage { position: relative; min-width: 0; }
+  #map { position: absolute; inset: 0; background: var(--water); }
+  .hud { position: absolute; z-index: 500; top: 14px; background: var(--surface); border-radius: 12px; box-shadow: 0 2px 12px rgba(15,42,61,.22); padding: 10px 14px; }
+  .hud.left { left: 14px; display: flex; align-items: center; gap: 12px; max-width: calc(100% - 230px); }
+  .hud.left b { display: block; font: 600 20px/1.1 var(--display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hud.left span { font-size: 13px; color: var(--ink-2); }
+  .hud.right { right: 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-2); padding: 6px 6px 6px 14px; }
+  .toasts { position: absolute; z-index: 600; left: 50%; bottom: 26px; transform: translateX(-50%); display: grid; gap: 8px; width: min(520px, calc(100% - 32px)); pointer-events: none; }
+  .toast { background: var(--ink); color: #fff; border-radius: 10px; padding: 11px 16px; font-weight: 500; box-shadow: 0 4px 16px rgba(15,42,61,.3); }
+  .toast.error { background: var(--red); }
+  .toast.ok { background: var(--green); }
+  .picking #map { cursor: crosshair; }
+
+  /* Marcadores */
+  .beacon { position: relative; width: 22px; height: 22px; }
+  .beacon i { position: absolute; inset: 0; border-radius: 50%; background: var(--magenta); border: 3px solid #fff; box-shadow: 0 1px 5px rgba(0,0,0,.45); }
+  .beacon::before, .beacon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--magenta); animation: ping 2.6s ease-out infinite; }
+  .beacon::after { animation-delay: 1.3s; }
+  @keyframes ping { from { transform: scale(1); opacity: .85; } to { transform: scale(3.6); opacity: 0; } }
+  .leaflet-popup-content { font: 400 14px/1.4 var(--font); color: var(--ink); margin: 12px 14px; }
+  .leaflet-popup-content b { font-weight: 600; }
+  .leaflet-popup-content small { color: var(--ink-2); }
+  .leaflet-container { font-family: var(--font); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .beam, .beacon::before, .beacon::after { animation: none; }
+    .beacon::before { transform: scale(2); opacity: .35; }
+  }
+  @media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; grid-template-rows: 46vh auto; height: auto; min-height: 100vh; }
+    .stage { grid-row: 1; height: 46vh; }
+    .console { border-right: 0; }
+    .pane { overflow: visible; }
+    .login { grid-template-columns: 1fr; }
+    .login-card { padding: 36px 24px; }
+    .login-card h1 { font-size: 36px; }
+    .hud.left { max-width: calc(100% - 28px); }
+    .hud.right { top: auto; bottom: 14px; right: auto; left: 14px; }
+    .tab { font-size: 13px; }
+    .toasts { bottom: 70px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================== Entrada ================== -->
+<div class="login" id="login">
+  <div class="sea" aria-hidden="true"><div class="beam"></div><div class="lamp"></div></div>
+  <form class="login-card" id="loginForm" novalidate>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/><circle cx="15" cy="15" r="8.5" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/><circle cx="15" cy="15" r="4" fill="#FF8FCB"/></svg>
+      Faro
+    </div>
+    <h1>Solo ves a quien te deja verle</h1>
+    <p class="lead">Faro muestra la ubicación de las personas que aceptaron compartirla contigo. Pueden retirarte el permiso cuando quieran.</p>
+    <div class="login-error" id="loginError" role="alert" hidden></div>
+
+    <div id="stepPhone">
+      <label class="field"><span>Tu número de teléfono</span>
+        <input class="input" id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+573001111111">
+      </label>
+      <button class="btn block" type="submit">Pedir código</button>
+    </div>
+
+    <div id="stepCode" hidden>
+      <label class="field"><span>Código de 6 dígitos enviado a <b id="codePhone"></b></span>
+        <input class="input" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+      </label>
+      <button class="btn block" type="submit">Entrar</button>
+      <button class="linklike" type="button" id="btnOtherPhone">Usar otro número</button>
+    </div>
+
+    <p class="note">Entorno de laboratorio: el SMS es simulado y el código se completa solo.</p>
+  </form>
+</div>
+
+<!-- ================== Aplicación ================== -->
+<div class="shell" id="app" hidden>
+  <aside class="console">
+    <header class="masthead">
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/><circle cx="15" cy="15" r="8.5" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/><circle cx="15" cy="15" r="4" fill="#FF8FCB"/></svg>
+        Faro
+      </div>
+      <div class="session"><b id="who"></b><button type="button" id="btnLogout">Cerrar sesión</button></div>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Secciones del panel">
+      <button class="tab" role="tab" id="tab-track" aria-controls="pane-track" aria-selected="true">Seguimiento</button>
+      <button class="tab" role="tab" id="tab-zone" aria-controls="pane-zone" aria-selected="false">Zona<span class="count" id="zoneCount" hidden></span></button>
+      <button class="tab" role="tab" id="tab-perms" aria-controls="pane-perms" aria-selected="false">Permisos<span class="count" id="permCount" hidden></span></button>
+      <button class="tab" role="tab" id="tab-me" aria-controls="pane-me" aria-selected="false">Mi cuenta</button>
+    </div>
+
+    <!-- Seguimiento -->
+    <section class="pane" id="pane-track" role="tabpanel" aria-labelledby="tab-track">
+      <h2>A quién puedes ver</h2>
+      <div class="people" id="people"></div>
+
+      <h2>Última señal</h2>
+      <div id="signal"></div>
+
+      <h2>Periodo del recorrido</h2>
+      <div class="chips" id="rangeChips">
+        <button class="chip" type="button" data-range="1h" aria-pressed="false">Última hora</button>
+        <button class="chip" type="button" data-range="today" aria-pressed="false">Hoy</button>
+        <button class="chip" type="button" data-range="7d" aria-pressed="false">7 días</button>
+        <button class="chip" type="button" data-range="all" aria-pressed="true">Todo</button>
+        <button class="chip" type="button" data-range="custom" aria-pressed="false">Fechas exactas</button>
+      </div>
+      <div class="custom-range" id="customRange" hidden>
+        <label class="field"><span>Desde</span><input class="input" id="desde" type="datetime-local"></label>
+        <label class="field"><span>Hasta</span><input class="input" id="hasta" type="datetime-local"></label>
+        <button class="btn quiet sm" type="button" id="btnApplyRange">Ver ese periodo</button>
+      </div>
+
+      <h2>Recorrido</h2>
+      <div id="stats"></div>
+      <div id="jumpFlag"></div>
+
+      <h2 id="timelineTitle">Punto a punto</h2>
+      <ol class="timeline" id="timeline"></ol>
+      <p class="note" id="timelineNote" hidden></p>
+    </section>
+
+    <!-- Zona -->
+    <section class="pane" id="pane-zone" role="tabpanel" aria-labelledby="tab-zone" hidden>
+      <h2>Zona de aviso para <span id="zoneWho"></span></h2>
+      <p>Marca un lugar en el mapa y un radio. Faro te avisa cuando esta persona entra o sale de la zona.</p>
+      <div class="range-row">
+        <input type="range" id="radius" min="100" max="5000" step="50" value="500" aria-label="Radio de la zona en metros">
+        <output id="radiusOut" for="radius">500 m</output>
+      </div>
+      <div class="row">
+        <button class="btn" type="button" id="btnPick">Elegir el centro en el mapa</button>
+        <button class="btn quiet" type="button" id="btnClearZone" hidden>Quitar zona</button>
+      </div>
+      <h2>Estado</h2>
+      <div class="zone-status" id="zoneStatus">Sin zona definida</div>
+      <h2>Avisos de esta sesión</h2>
+      <ul class="log" id="zoneLog"></ul>
+      <div class="empty" id="zoneLogEmpty">Aquí aparecerá cada entrada o salida de la zona, con su hora.</div>
+    </section>
+
+    <!-- Permisos -->
+    <section class="pane" id="pane-perms" role="tabpanel" aria-labelledby="tab-perms" hidden>
+      <h2>Pedir permiso para ver a alguien</h2>
+      <form class="inline-form" id="requestForm">
+        <input class="input" id="reqPhone" type="tel" inputmode="tel" placeholder="+573002222222" aria-label="Número de la persona">
+        <button class="btn" type="submit">Pedir permiso</button>
+      </form>
+      <p class="note">La persona debe tener cuenta en Faro y aceptar la solicitud. Hasta entonces no ves nada.</p>
+
+      <h2>Quieren ver tu ubicación</h2>
+      <div id="incoming"></div>
+
+      <h2>Permisos que pediste</h2>
+      <div id="outgoing"></div>
+    </section>
+
+    <!-- Mi cuenta -->
+    <section class="pane" id="pane-me" role="tabpanel" aria-labelledby="tab-me" hidden>
+      <h2>Tu ubicación</h2>
+      <p>La app de Faro en tu celular envía tu ubicación de forma periódica. Desde aquí puedes enviar un punto con la ubicación de este navegador.</p>
+      <button class="btn" type="button" id="btnShare">Enviar mi ubicación ahora</button>
+
+      <h2>Tus datos</h2>
+      <p>Solo te ven las personas a las que aceptaste en Permisos. Puedes borrar todo lo que Faro ha guardado de ti.</p>
+      <button class="btn danger" type="button" id="btnDeleteMine">Borrar todo mi historial</button>
+      <p class="note">Borrar el historial no se puede deshacer.</p>
+    </section>
+  </aside>
+
+  <main class="stage" id="stage">
+    <div id="map" aria-label="Mapa con el recorrido"></div>
+    <div class="hud left" id="hudLeft" hidden>
+      <svg class="mark" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="#C2187A" stroke-opacity=".3" stroke-width="1.5"/><circle cx="15" cy="15" r="8.5" fill="none" stroke="#C2187A" stroke-opacity=".6" stroke-width="1.5"/><circle cx="15" cy="15" r="4" fill="#C2187A"/></svg>
+      <div style="min-width:0"><b id="hudWho"></b><span id="hudSignal"></span></div>
+    </div>
+    <div class="hud right">
+      <span id="hudSync">Sin datos todavía</span>
+      <button class="btn quiet sm" type="button" id="btnRefresh">Actualizar</button>
+    </div>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  </main>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+"use strict";
+// ======================================================================
+// Utilidades
+// ======================================================================
+const $ = (id) => document.getElementById(id);
+
+// Constructor de nodos: todo el contenido dinámico se inserta como texto
+// (textContent), nunca como HTML, así los datos del servidor no pueden inyectar código (XSS).
+function h(tag, attrs = {}, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "text") el.textContent = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat()) if (kid != null) el.append(kid);
+  return el;
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const nf = (n, d = 0) => n.toLocaleString("es-CO", { minimumFractionDigits: d, maximumFractionDigits: d });
+
+function fmtPhone(p) {
+  const m = /^\+57(\d{3})(\d{3})(\d{4})$/.exec(p || "");
+  return m ? `+57 ${m[1]} ${m[2]} ${m[3]}` : (p || "");
+}
+function fmtDist(m) {
+  return m < 1000 ? `${Math.round(m)} m` : `${nf(m / 1000, m < 100000 ? 1 : 0)} km`;
+}
+function fmtDur(s) {
+  if (s < 60) return `${Math.round(s)} s`;
+  const m = Math.round(s / 60);
+  if (m < 60) return `${m} min`;
+  const hh = Math.floor(m / 60), mm = m % 60;
+  if (hh < 24) return mm ? `${hh} h ${mm} min` : `${hh} h`;
+  return `${Math.floor(hh / 24)} d ${hh % 24} h`;
+}
+function ago(iso) {
+  const s = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (s < 5) return "ahora mismo";
+  if (s < 60) return `hace ${Math.floor(s)} s`;
+  if (s < 3600) return `hace ${Math.floor(s / 60)} min`;
+  if (s < 86400) return `hace ${Math.floor(s / 3600)} h`;
+  const d = Math.floor(s / 86400);
+  return `hace ${d} ${d === 1 ? "día" : "días"}`;
+}
+function fmtClock(iso) {
+  const d = new Date(iso);
+  const t = d.toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  if (d.toDateString() === new Date().toDateString()) return t;
+  return d.toLocaleDateString("es-CO", { day: "numeric", month: "short" }) + ", " + t;
+}
+// Distancia en metros entre dos puntos (fórmula de Haversine)
+function haversine(a, b) {
+  const R = 6371000, rad = Math.PI / 180;
+  const dLat = (b.latitude - a.latitude) * rad, dLon = (b.longitude - a.longitude) * rad;
+  const x = Math.sin(dLat / 2) ** 2 + Math.cos(a.latitude * rad) * Math.cos(b.latitude * rad) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(x));
+}
+
+function toast(text, type = "") {
+  const t = h("div", { class: "toast " + type, text });
+  $("toasts").append(t);
+  setTimeout(() => t.remove(), 6500);
+}
+
+// ======================================================================
+// Estado global: una sola fuente de verdad para toda la página
+// ======================================================================
+const state = {
+  token: null, phone: null,
+  people: [],            // [{ key, phone, self, last }]
+  selected: null,        // "me" o el id del usuario elegido
+  range: "all",
+  track: null,           // resultado de analyze()
+  lastSync: null,
+  timer: null,
+  fence: null,           // { lat, lng, radius } de la persona elegida
+  fenceInside: {},       // último estado conocido por persona (para detectar transiciones)
+  picking: false,
+  unseenAlerts: 0,
+};
+
+// sessionStorage es por pestaña: una pestaña puede ser A y otra B.
+function saveSession() { try { sessionStorage.setItem("faro.session", JSON.stringify({ token: state.token, phone: state.phone })); } catch (e) {} }
+function loadSession() { try { const s = JSON.parse(sessionStorage.getItem("faro.session") || "null"); if (s) { state.token = s.token; state.phone = s.phone; } } catch (e) {} }
+function clearSession() { try { sessionStorage.removeItem("faro.session"); } catch (e) {} }
+
+// ======================================================================
+// Patrón Facade: una sola función encapsula TODA la comunicación con la API
+// (cabeceras, token, lectura del JSON y manejo uniforme de errores).
+// ======================================================================
+async function api(path, opts = {}) {
+  const headers = { "Content-Type": "application/json", ...(opts.headers || {}) };
+  if (state.token) headers["Authorization"] = "Bearer " + state.token;
+  let res;
+  try {
+    res = await fetch(path, { ...opts, headers });
+  } catch (e) {
+    const err = new Error("No hay conexión con el servidor. Revisa que el backend siga encendido.");
+    err.status = 0;
+    throw err;
+  }
+  let data = null;
+  try { data = await res.json(); } catch (e) {}
+  if (!res.ok) {
+    let msg = res.statusText || "Error";
+    if (data && data.detail) msg = Array.isArray(data.detail) ? data.detail.map((d) => d.msg).join("; ") : data.detail;
+    const err = new Error(msg);
+    err.status = res.status;
+    if (res.status === 401 && state.token) logout("Tu sesión venció. Entra de nuevo.");
+    throw err;
+  }
+  return data;
+}
+
+// ======================================================================
+// Mapa (Leaflet + OpenStreetMap, sin clave de API)
+// ======================================================================
+const map = L.map("map", { zoomControl: false }).setView([4.65, -74.08], 12);   // Bogotá
+L.control.zoom({ position: "bottomright" }).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap" }).addTo(map);
+const routeLayer = L.layerGroup().addTo(map);   // recorrido: se redibuja en cada actualización
+const fenceLayer = L.layerGroup().addTo(map);   // zona de aviso: independiente del recorrido
+const pointMarkers = new Map();                 // id del punto -> marcador (para la línea de tiempo)
+
+// Geocodificación inversa (coordenadas -> dirección) con Nominatim.
+// Caché + cola en serie: nunca más de una consulta por segundo, como exige el servicio.
+const geoCache = new Map();
+let geoChain = Promise.resolve();
+function reverseGeocode(lat, lon) {
+  const key = lat.toFixed(4) + "," + lon.toFixed(4);
+  if (geoCache.has(key)) return Promise.resolve(geoCache.get(key));
+  const job = geoChain.then(async () => {
+    if (geoCache.has(key)) return geoCache.get(key);
+    try {
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&lat=${lat}&lon=${lon}&accept-language=es`);
+      const d = await r.json();
+      const a = d.address || {};
+      const street = [a.road, a.house_number].filter(Boolean).join(" # ");
+      const parts = [street, a.neighbourhood || a.suburb, a.city || a.town || a.village].filter(Boolean);
+      const addr = parts.length ? parts.join(", ") : (d.display_name || null);
+      geoCache.set(key, addr);
+      return addr;
+    } catch (e) { return null; }
+  });
+  geoChain = job.then(() => sleep(1100), () => sleep(1100));
+  return job;
+}
+
+// ======================================================================
+// Entrada
+// ======================================================================
+function loginError(msg) { const b = $("loginError"); b.textContent = msg || ""; b.hidden = !msg; }
+
+$("loginForm").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  loginError("");
+  const phone = $("phone").value.trim();
+  try {
+    if ($("stepCode").hidden) {
+      // Paso 1: pedir el código
+      const d = await api("/auth/request-code", { method: "POST", body: JSON.stringify({ phone }) });
+      $("codePhone").textContent = fmtPhone(phone);
+      $("stepPhone").hidden = true;
+      $("stepCode").hidden = false;
+      $("code").value = d.dev_code || "";   // solo llega en DEV_MODE (SMS simulado)
+      $("code").focus();
+    } else {
+      // Paso 2: verificar y entrar
+      const d = await api("/auth/verify", { method: "POST", body: JSON.stringify({ phone, code: $("code").value.trim() }) });
+      state.token = d.access_token;
+      state.phone = phone;
+      saveSession();
+      enterApp();
+    }
+  } catch (e) {
+    loginError(e.status === 422 ? "Escribe el número con + y el código del país, por ejemplo +573001111111." : e.message);
+  }
+});
+$("btnOtherPhone").onclick = () => { $("stepCode").hidden = true; $("stepPhone").hidden = false; $("code").value = ""; loginError(""); $("phone").focus(); };
+$("btnLogout").onclick = () => logout();
+
+function enterApp() {
+  $("login").hidden = true;
+  $("app").hidden = false;
+  $("who").textContent = fmtPhone(state.phone);
+  map.invalidateSize();
+  refresh(true);
+  clearInterval(state.timer);
+  // Sondeo periódico (polling): cada 15 s se piden datos nuevos
+  state.timer = setInterval(() => refresh(false), 15000);
+}
+
+function logout(msg) {
+  clearInterval(state.timer);
+  Object.assign(state, { token: null, phone: null, people: [], selected: null, track: null, fence: null, fenceInside: {}, lastSync: null });
+  clearSession();
+  routeLayer.clearLayers(); fenceLayer.clearLayers();
+  $("app").hidden = true;
+  $("login").hidden = false;
+  $("stepCode").hidden = true; $("stepPhone").hidden = false; $("code").value = "";
+  loginError(msg || "");
+}
+
+// Ciclo completo de actualización
+async function refresh(fit) {
+  if (!state.token) return;
+  try {
+    await loadPeople();
+    await loadHistory(fit);
+    await loadConsents();
+  } catch (e) {
+    if (state.token) toast(e.message, "error");
+  }
+}
+$("btnRefresh").onclick = () => refresh(false);
+
+// ======================================================================
+// Pestañas
+// ======================================================================
+const TABS = ["track", "zone", "perms", "me"];
+function showTab(name) {
+  for (const t of TABS) {
+    $("tab-" + t).setAttribute("aria-selected", String(t === name));
+    $("pane-" + t).hidden = t !== name;
+  }
+  if (name === "zone") { state.unseenAlerts = 0; $("zoneCount").hidden = true; }
+}
+for (const t of TABS) $("tab-" + t).onclick = () => showTab(t);
+
+// ======================================================================
+// Personas visibles
+// ======================================================================
+async function loadPeople() {
+  const targets = await api("/targets");
+  const entries = [
+    ...targets.map((t) => ({ key: String(t.user_id), phone: t.phone, self: false, last: null })),
+    { key: "me", phone: state.phone, self: true, last: null },
+  ];
+  // Última señal de cada persona (en paralelo)
+  await Promise.all(entries.map(async (e) => {
+    try {
+      if (e.self) { const r = await api("/locations/me?limit=1"); e.last = r[0] || null; }
+      else e.last = await api(`/targets/${e.key}/last`);
+    } catch (err) { e.last = null; }   // 404: todavía no ha enviado ninguna ubicación
+  }));
+  state.people = entries;
+  if (!entries.some((e) => e.key === state.selected)) selectPerson(entries[0].key, false);
+  renderPeople();
+}
+
+function currentPerson() { return state.people.find((p) => p.key === state.selected) || null; }
+
+function selectPerson(key, load = true) {
+  state.selected = key;
+  state.track = null;
+  loadFence();
+  if (load) { renderPeople(); loadHistory(true); }
+}
+
+function signalClass(last) {
+  if (!last) return "";
+  const min = (Date.now() - new Date(last.recorded_at).getTime()) / 60000;
+  return min <= 20 ? "live" : min <= 1440 ? "stale" : "";
+}
+
+function renderPeople() {
+  const box = $("people");
+  box.replaceChildren();
+  for (const p of state.people) {
+    box.append(h("button", { class: "person", type: "button", "aria-pressed": String(p.key === state.selected), onclick: () => selectPerson(p.key) },
+      h("span", { class: "dot " + signalClass(p.last) }),
+      h("span", { class: "who" },
+        p.self ? "Tú" : fmtPhone(p.phone),
+        h("small", { text: p.last ? "Última señal " + ago(p.last.recorded_at) : "Aún no ha enviado ubicaciones" })),
+      p.self ? h("span", { class: "pill", text: "tu recorrido" }) : null));
+  }
+  if (state.people.length === 1) {
+    box.append(h("div", { class: "empty", text: "Todavía nadie te ha dado permiso. Pídelo en la pestaña Permisos; la otra persona debe aceptarlo desde su cuenta." }));
+  }
+  const person = currentPerson();
+  $("zoneWho").textContent = person ? (person.self ? "tu propio recorrido" : fmtPhone(person.phone)) : "";
+  renderHud();
+}
+
+// ======================================================================
+// Recorrido: datos, análisis y dibujo
+// ======================================================================
+function rangeBounds() {
+  const now = new Date();
+  if (state.range === "1h") return { desde: new Date(now - 3600e3) };
+  if (state.range === "today") { const d = new Date(now); d.setHours(0, 0, 0, 0); return { desde: d }; }
+  if (state.range === "7d") return { desde: new Date(now - 7 * 86400e3) };
+  if (state.range === "custom") {
+    return { desde: $("desde").value ? new Date($("desde").value) : null, hasta: $("hasta").value ? new Date($("hasta").value) : null };
+  }
+  return {};
+}
+
+for (const chip of $("rangeChips").querySelectorAll(".chip")) {
+  chip.onclick = () => {
+    state.range = chip.dataset.range;
+    for (const c of $("rangeChips").querySelectorAll(".chip")) c.setAttribute("aria-pressed", String(c === chip));
+    $("customRange").hidden = state.range !== "custom";
+    if (state.range !== "custom") loadHistory(true);
+  };
+}
+$("btnApplyRange").onclick = () => loadHistory(true);
+
+// Detector de saltos imposibles: si entre dos puntos seguidos la velocidad necesaria
+// supera MAX_KMH, el tramo se marca como anómalo (GPS falso, error o datos manipulados).
+// Es una regla explicable, pensada para que una persona la revise, no para bloquear sola.
+const MAX_KMH = 160;      // por encima de esto no es un desplazamiento urbano creíble
+const MIN_JUMP_M = 500;   // se ignoran saltos pequeños: son ruido normal del GPS
+function analyze(pointsDesc) {
+  const pts = [...pointsDesc].reverse();   // la API entrega de más reciente a más antiguo
+  const segs = [];
+  let dist = 0, jumps = 0;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1], b = pts[i];
+    const d = haversine(a, b);
+    const dt = (new Date(b.recorded_at) - new Date(a.recorded_at)) / 1000;
+    const kmh = dt > 0 ? (d / dt) * 3.6 : Infinity;
+    const jump = d > MIN_JUMP_M && kmh > MAX_KMH;
+    if (jump) jumps++; else dist += d;   // los saltos no cuentan como distancia recorrida
+    segs.push({ a, b, d, dt, kmh, jump });
+  }
+  const span = pts.length > 1 ? (new Date(pts[pts.length - 1].recorded_at) - new Date(pts[0].recorded_at)) / 1000 : 0;
+  return { pts, segs, dist, jumps, span };
+}
+
+async function loadHistory(fit) {
+  const key = state.selected;
+  if (!key) return;
+  const q = new URLSearchParams({ limit: "1000" });
+  const { desde, hasta } = rangeBounds();
+  if (desde) q.set("desde", desde.toISOString());
+  if (hasta) q.set("hasta", hasta.toISOString());
+  let pts;
+  try {
+    pts = await api(key === "me" ? `/locations/me?${q}` : `/targets/${key}/history?${q}`);
+  } catch (e) {
+    if (e.status === 403) {
+      toast("Esa persona te retiró el permiso. Ya no puedes ver su ubicación.", "error");
+      await loadPeople();
+      if (state.selected !== key) return loadHistory(true);
+    } else if (state.token) toast(e.message, "error");
+    return;
+  }
+  if (key !== state.selected) return;   // se eligió otra persona mientras llegaba la respuesta
+  state.track = analyze(pts);
+  state.lastSync = Date.now();
+  drawRoute(fit);
+  renderSignal();
+  renderStats();
+  renderTimeline();
+  checkFence();
+  renderHud();
+}
+
+function pointPopup(p, seg) {
+  const addr = h("small", { text: "Buscando dirección…" });
+  reverseGeocode(p.latitude, p.longitude).then((a) => { addr.textContent = a || "Dirección no disponible"; });
+  return h("div", {},
+    h("b", { text: fmtClock(p.recorded_at) }), h("br"),
+    addr, h("br"),
+    h("small", { text: `Precisión ±${p.accuracy != null ? Math.round(p.accuracy) : "?"} m` }),
+    seg && seg.jump ? h("div", {}, h("small", { text: `Salto anómalo: ${fmtDist(seg.d)} en ${fmtDur(seg.dt)}` })) : null);
+}
+
+function drawRoute(fit) {
+  routeLayer.clearLayers();
+  pointMarkers.clear();
+  const tr = state.track;
+  const person = currentPerson();
+  if (!tr) return;
+  const ll = (p) => [p.latitude, p.longitude];
+
+  // Borde blanco bajo la ruta: la hace legible sobre cualquier color del mapa
+  const normal = tr.segs.filter((s) => !s.jump);
+  for (const s of normal) L.polyline([ll(s.a), ll(s.b)], { color: "#fff", weight: 8, opacity: 0.9, interactive: false }).addTo(routeLayer);
+  for (const s of tr.segs) {
+    L.polyline([ll(s.a), ll(s.b)], s.jump
+      ? { color: "#B93424", weight: 3, dashArray: "6 8", opacity: 0.9 }
+      : { color: "#C2187A", weight: 4, opacity: 0.95 }).addTo(routeLayer);
+  }
+  tr.pts.forEach((p, i) => {
+    const seg = i > 0 ? tr.segs[i - 1] : null;
+    const m = L.circleMarker(ll(p), { radius: 5, color: seg && seg.jump ? "#B93424" : "#C2187A", weight: 2, fillColor: "#fff", fillOpacity: 1 })
+      .bindPopup(() => pointPopup(p, seg)).addTo(routeLayer);
+    pointMarkers.set(p.id, m);
+  });
+
+  // El faro: última señal conocida de la persona, con su círculo de precisión
+  const last = person && person.last;
+  if (last) {
+    if (last.accuracy) L.circle(ll(last), { radius: last.accuracy, color: "#C2187A", weight: 1, fillOpacity: 0.1, interactive: false }).addTo(routeLayer);
+    const icon = L.divIcon({ className: "", html: '<div class="beacon"><i></i></div>', iconSize: [22, 22], iconAnchor: [11, 11] });
+    L.marker(ll(last), { icon, zIndexOffset: 1000, title: "Última señal" }).bindPopup(() => pointPopup(last, null)).addTo(routeLayer);
+  }
+
+  if (fit) {
+    const all = tr.pts.map(ll);
+    if (last) all.push(ll(last));
+    if (all.length === 1) map.setView(all[0], 16);
+    else if (all.length > 1) map.fitBounds(L.latLngBounds(all).pad(0.2), { maxZoom: 17 });
+  }
+}
+
+function renderSignal() {
+  const box = $("signal");
+  const person = currentPerson();
+  const last = person && person.last;
+  if (!last) {
+    box.replaceChildren(h("div", { class: "empty", text: person && person.self
+      ? "Aún no has enviado ubicaciones. Activa el envío en la app de Faro o usa Mi cuenta."
+      : "Esta persona aún no ha enviado ubicaciones." }));
+    return;
+  }
+  const addr = h("div", { class: "addr", text: "Buscando dirección…" });
+  reverseGeocode(last.latitude, last.longitude).then((a) => { addr.textContent = a || "Dirección no disponible"; });
+  box.replaceChildren(h("div", { class: "signal" }, addr,
+    h("dl", {},
+      h("dt", { text: "Recibida" }), h("dd", { text: `${ago(last.recorded_at)} (${fmtClock(last.recorded_at)})` }),
+      h("dt", { text: "Precisión" }), h("dd", { text: last.accuracy != null ? `±${Math.round(last.accuracy)} m` : "desconocida" }),
+      h("dt", { text: "Coordenadas" }), h("dd", { text: `${last.latitude.toFixed(5)}, ${last.longitude.toFixed(5)}` }))));
+}
+
+function renderStats() {
+  const tr = state.track;
+  const box = $("stats"), flag = $("jumpFlag");
+  flag.replaceChildren();
+  if (!tr || !tr.pts.length) {
+    box.replaceChildren(h("div", { class: "empty", text: "No hay ubicaciones en este periodo. Prueba con un periodo más amplio." }));
+    return;
+  }
+  const kmh = tr.span > 0 ? (tr.dist / tr.span) * 3.6 : 0;
+  const stat = (value, label) => h("div", { class: "stat" }, h("b", { text: value }), h("span", { text: label }));
+  box.replaceChildren(h("div", { class: "stats" },
+    stat(nf(tr.pts.length), tr.pts.length === 1 ? "punto" : "puntos"),
+    stat(fmtDist(tr.dist), "recorridos"),
+    stat(tr.span ? fmtDur(tr.span) : "0 min", "de registro"),
+    stat(`${nf(kmh, kmh < 10 ? 1 : 0)} km/h`, "velocidad media")));
+  if (tr.jumps) {
+    flag.append(h("div", { class: "flag", text:
+      `${tr.jumps} ${tr.jumps === 1 ? "salto anómalo" : "saltos anómalos"}: tramos que exigirían ir a más de ${MAX_KMH} km/h. ` +
+      "Puede ser un GPS falso o un error del dispositivo; no cuentan en la distancia." }));
+  }
+}
+
+function renderTimeline() {
+  const tr = state.track;
+  const list = $("timeline"), note = $("timelineNote");
+  list.replaceChildren();
+  note.hidden = true;
+  $("timelineTitle").hidden = !tr || !tr.pts.length;
+  if (!tr || !tr.pts.length) return;
+  const MAX = 150;
+  const n = tr.pts.length;
+  for (let i = n - 1; i >= Math.max(0, n - MAX); i--) {   // del más reciente al más antiguo
+    const p = tr.pts[i];
+    const seg = i > 0 ? tr.segs[i - 1] : null;
+    let detail = "Primer punto del periodo";
+    if (seg) {
+      detail = seg.jump
+        ? `Salto anómalo: ${fmtDist(seg.d)} en ${fmtDur(seg.dt)}`
+        : `${fmtDist(seg.d)} en ${fmtDur(seg.dt)} desde el punto anterior`;
+    }
+    list.append(h("li", { class: seg && seg.jump ? "jump" : "" },
+      h("button", { type: "button", onclick: () => focusPoint(p) },
+        h("time", { text: fmtClock(p.recorded_at) }),
+        h("small", { text: detail }))));
+  }
+  if (n > MAX) { note.hidden = false; note.textContent = `Se muestran los ${MAX} puntos más recientes de ${nf(n)}. El mapa los dibuja todos.`; }
+}
+
+function focusPoint(p) {
+  map.flyTo([p.latitude, p.longitude], Math.max(map.getZoom(), 16), { duration: 0.6 });
+  const m = pointMarkers.get(p.id);
+  if (m) m.openPopup();
+}
+
+function renderHud() {
+  const person = currentPerson();
+  $("hudLeft").hidden = !person;
+  if (person) {
+    $("hudWho").textContent = person.self ? "Tu recorrido" : fmtPhone(person.phone);
+    $("hudSignal").textContent = person.last ? "Última señal " + ago(person.last.recorded_at) : "Sin señales todavía";
+  }
+  $("hudSync").textContent = state.lastSync ? "Actualizado " + ago(new Date(state.lastSync).toISOString()) : "Sin datos todavía";
+}
+setInterval(() => { if (state.token) renderHud(); }, 5000);   // mantiene al día los "hace 2 min"
+
+// ======================================================================
+// Zona de aviso (geocerca): se avisa en las TRANSICIONES (entrar / salir),
+// no cada vez que se actualiza el mapa.
+// ======================================================================
+function fenceKey() { return `faro.fence.${state.phone}.${state.selected}`; }
+function loadFence() {
+  state.fence = null;
+  try { state.fence = JSON.parse(localStorage.getItem(fenceKey()) || "null"); } catch (e) {}
+  if (state.fence) $("radius").value = state.fence.radius;
+  $("radiusOut").textContent = fmtDist(Number($("radius").value));
+  drawFence();
+}
+function saveFence() {
+  try {
+    if (state.fence) localStorage.setItem(fenceKey(), JSON.stringify(state.fence));
+    else localStorage.removeItem(fenceKey());
+  } catch (e) {}
+}
+function drawFence(inside) {
+  fenceLayer.clearLayers();
+  $("btnClearZone").hidden = !state.fence;
+  if (!state.fence) return;
+  const color = inside == null ? "#0F2A3D" : inside ? "#1E7B4F" : "#B93424";
+  L.circle([state.fence.lat, state.fence.lng], { radius: state.fence.radius, color, weight: 2, dashArray: "8 6", fillOpacity: 0.07, interactive: false }).addTo(fenceLayer);
+  L.circleMarker([state.fence.lat, state.fence.lng], { radius: 3, color, fillOpacity: 1, interactive: false }).addTo(fenceLayer);
+}
+
+$("btnPick").onclick = () => {
+  state.picking = true;
+  $("stage").classList.add("picking");
+  toast("Haz clic en el mapa, en el centro de la zona.");
+};
+map.on("click", (e) => {
+  if (!state.picking) return;
+  state.picking = false;
+  $("stage").classList.remove("picking");
+  state.fence = { lat: e.latlng.lat, lng: e.latlng.lng, radius: Number($("radius").value) };
+  delete state.fenceInside[state.selected];   // zona nueva: no hay estado anterior con el que comparar
+  saveFence();
+  checkFence();
+});
+$("radius").oninput = () => {
+  $("radiusOut").textContent = fmtDist(Number($("radius").value));
+  if (!state.fence) return;
+  state.fence.radius = Number($("radius").value);
+  delete state.fenceInside[state.selected];
+  saveFence();
+  checkFence();
+};
+$("btnClearZone").onclick = () => {
+  state.fence = null;
+  delete state.fenceInside[state.selected];
+  saveFence();
+  checkFence();
+};
+
+function checkFence() {
+  const box = $("zoneStatus");
+  const person = currentPerson();
+  const last = person && person.last;
+  if (!state.fence) { drawFence(); box.className = "zone-status"; box.textContent = "Sin zona definida"; return; }
+  if (!last) { drawFence(); box.className = "zone-status"; box.textContent = "Zona lista. Falta la primera señal de la persona."; return; }
+
+  const d = haversine({ latitude: state.fence.lat, longitude: state.fence.lng }, last);
+  const inside = d <= state.fence.radius;
+  drawFence(inside);
+  box.className = "zone-status " + (inside ? "in" : "out");
+  box.textContent = inside ? "Dentro de la zona" : `Fuera de la zona, a ${fmtDist(d - state.fence.radius)} del borde`;
+
+  // Solo se avisa cuando el estado cambia respecto a la lectura anterior
+  const before = state.fenceInside[state.selected];
+  if (before !== undefined && before !== inside) {
+    const who = person.self ? "Tú" : fmtPhone(person.phone);
+    const text = `${who} ${inside ? "entró a" : "salió de"} la zona`;
+    $("zoneLog").prepend(h("li", { class: inside ? "enter" : "" }, text, h("small", { text: fmtClock(last.recorded_at) })));
+    $("zoneLogEmpty").hidden = true;
+    toast(text, inside ? "ok" : "error");
+    if ($("pane-zone").hidden) { state.unseenAlerts++; $("zoneCount").textContent = state.unseenAlerts; $("zoneCount").hidden = false; }
+  }
+  state.fenceInside[state.selected] = inside;
+}
+
+// ======================================================================
+// Permisos (consentimientos)
+// ======================================================================
+const STATUS_ES = { pending: "Pendiente", accepted: "Aceptado", rejected: "Rechazado", revoked: "Retirado" };
+
+function renderConsents(box, list, phoneField, emptyText, actionsFor) {
+  box.replaceChildren();
+  if (!list.length) { box.append(h("div", { class: "empty", text: emptyText })); return; }
+  for (const c of list) {
+    const actions = actionsFor(c).map(([action, label, cls]) =>
+      h("button", { class: "btn sm " + cls, type: "button", onclick: () => consentAction(c.id, action), text: label }));
+    box.append(h("div", { class: "consent" },
+      h("div", { class: "top" }, fmtPhone(c[phoneField]), h("span", { class: "pill " + c.status, text: STATUS_ES[c.status] || c.status })),
+      h("small", { text: "Pedido " + ago(c.created_at) }),
+      actions.length ? h("div", { class: "row" }, actions) : null));
+  }
+}
+
+async function loadConsents() {
+  const [incoming, outgoing] = await Promise.all([api("/consents/incoming"), api("/consents/outgoing")]);
+  renderConsents($("incoming"), incoming, "observer_phone", "Nadie ha pedido ver tu ubicación.", (c) => {
+    if (c.status === "pending") return [["accept", "Aceptar", ""], ["reject", "Rechazar", "quiet"]];
+    if (c.status === "accepted") return [["revoke", "Retirar permiso", "danger"]];
+    return [];
+  });
+  renderConsents($("outgoing"), outgoing, "target_phone", "No has pedido permiso a nadie.", (c) =>
+    (c.status === "pending" || c.status === "accepted") ? [["revoke", c.status === "pending" ? "Cancelar solicitud" : "Dejar de ver", "quiet"]] : []);
+  const pending = incoming.filter((c) => c.status === "pending").length;
+  $("permCount").textContent = pending;
+  $("permCount").hidden = !pending;
+}
+
+const DONE_ES = { accept: "Permiso aceptado", reject: "Solicitud rechazada", revoke: "Permiso retirado" };
+async function consentAction(id, action) {
+  try {
+    await api(`/consents/${id}/${action}`, { method: "POST" });
+    toast(DONE_ES[action], "ok");
+    refresh(false);
+  } catch (e) { toast(e.message, "error"); }
+}
+
+$("requestForm").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  try {
+    await api("/consents", { method: "POST", body: JSON.stringify({ phone: $("reqPhone").value.trim() }) });
+    toast("Permiso pedido. La otra persona debe aceptarlo.", "ok");
+    $("reqPhone").value = "";
+    loadConsents();
+  } catch (e) {
+    toast(e.status === 422 ? "Escribe el número con + y el código del país." : e.message, "error");
+  }
+});
+
+// ======================================================================
+// Mi cuenta
+// ======================================================================
+$("btnShare").onclick = () => {
+  if (!navigator.geolocation) return toast("Este navegador no permite obtener la ubicación.", "error");
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    try {
+      await api("/locations", { method: "POST", body: JSON.stringify({
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+        accuracy: Math.min(pos.coords.accuracy, 100000),
+        recorded_at: new Date(Math.min(pos.timestamp, Date.now())).toISOString(),
+      }) });
+      toast("Ubicación enviada", "ok");
+      refresh(false);
+    } catch (e) { toast(e.message, "error"); }
+  }, () => toast("No se pudo obtener la ubicación. Revisa el permiso de ubicación del navegador.", "error"),
+  { enableHighAccuracy: true, timeout: 15000 });
+};
+
+$("btnDeleteMine").onclick = async () => {
+  if (!confirm("¿Borrar todo tu historial de ubicaciones? No se puede deshacer.")) return;
+  try {
+    const d = await api("/locations/me", { method: "DELETE" });
+    toast(`Historial borrado: ${d.deleted} ${d.deleted === 1 ? "ubicación" : "ubicaciones"}`, "ok");
+    refresh(false);
+  } catch (e) { toast(e.message, "error"); }
+};
+
+// ======================================================================
+// Arranque: si la pestaña ya tenía sesión, se reanuda
+// ======================================================================
+loadSession();
+if (state.token) enterApp();
+</script>
+</body>
+</html>
