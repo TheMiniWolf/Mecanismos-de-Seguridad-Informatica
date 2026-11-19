@@ -1,0 +1,12 @@
+11/08/2025-20:02:27.099974  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:9262
+11/08/2025-20:02:06.599994  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:36352
+11/08/2025-20:02:33.599968  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:2499
+11/08/2025-20:02:39.379962  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:10281
+11/08/2025-20:02:15.219985  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:4849
+11/08/2025-20:02:58.819944  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:23985
+11/08/2025-20:02:12.759988  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:52132
+11/08/2025-20:02:35.539966  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:31157
+11/08/2025-20:02:25.339976  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:36273
+11/08/2025-20:02:50.819952  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:65400
+11/08/2025-20:02:43.559958  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:8149
+11/08/2025-20:02:53.819949  [**] [1:9000006:1] T2 Caso6 posible reflexion DNS [**] [Classification: Attempted Denial of Service] [Priority: 2] {UDP} 192.168.50.53:53 -> 192.168.50.110:52136

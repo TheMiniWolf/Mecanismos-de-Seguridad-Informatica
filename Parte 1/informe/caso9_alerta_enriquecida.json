@@ -1,0 +1,17 @@
+﻿{
+    "host":  "192.168.50.105",
+    "puntuacion":  80,
+    "prioridad":  "ALTA",
+    "indicadores":  [
+                        "escaneo_puertos",
+                        "dns_nombre_largo"
+                    ],
+    "eventos":  1243,
+    "explicacion":  "Puntuacion = suma de pesos por tipo de indicador distinto (escaneo_puertos, dns_nombre_largo) + 10 si hay \u003e1 fuente",
+    "validacion_humana":  {
+                              "revisor":  "Analista-1",
+                              "decision":  "CONFIRMADO PARCIALMENTE",
+                              "accion":  "ninguna automatica; investigar proceso origen y revisar logs del resolver",
+                              "reversible":  true
+                          }
+}

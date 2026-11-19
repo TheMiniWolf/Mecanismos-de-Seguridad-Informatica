@@ -1,0 +1,247 @@
+2026-11-12 00:23:29.914378-05:00 [info] <0.123.0>@ejabberd_config:load/1:82 Loading configuration from /etc/ejabberd/ejabberd.yml
+2026-11-12 00:23:30.036602-05:00 [warning] <0.123.0>@gen_mod:warn_soft_dep_fail/2:642 Module mod_mam is recommended for module mod_muc but is not found in the config
+2026-11-12 00:23:30.171761-05:00 [info] <0.123.0>@ejabberd_config:load/1:89 Configuration loaded successfully
+2026-11-12 00:23:30.283345-05:00 [info] <0.267.0>@ejabberd_systemd:maybe_start_timer/1:164 Watchdog notifications enabled
+2026-11-12 00:23:30.291412-05:00 [info] <0.270.0>@translate:load/2:127 Building language translation cache
+2026-11-12 00:23:30.393728-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'ejabberd_commands'
+2026-11-12 00:23:30.423080-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'route'
+2026-11-12 00:23:30.427135-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'route_multicast'
+2026-11-12 00:23:30.434118-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'session'
+2026-11-12 00:23:30.436610-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'session_counter'
+2026-11-12 00:23:30.442488-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 's2s'
+2026-11-12 00:23:30.444762-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'temporarily_blocked'
+2026-11-12 00:23:30.450648-05:00 [info] <0.266.0>@gen_mod:start_modules/0:141 Loading modules for localhost
+2026-11-12 00:23:30.451819-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'motd'
+2026-11-12 00:23:30.454546-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'motd_users'
+2026-11-12 00:23:30.462744-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'offline_msg'
+2026-11-12 00:23:30.481886-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'caps_features'
+2026-11-12 00:23:30.485413-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'pubsub_last_item'
+2026-11-12 00:23:30.488938-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_index'
+2026-11-12 00:23:30.493701-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_node'
+2026-11-12 00:23:30.496979-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_state'
+2026-11-12 00:23:30.499607-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'pubsub_item'
+2026-11-12 00:23:30.507113-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_orphan'
+2026-11-12 00:23:30.511754-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'roster'
+2026-11-12 00:23:30.516529-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'roster_version'
+2026-11-12 00:23:30.539092-05:00 [info] <0.498.0>@mod_stun_disco:parse_listener/1:616 Going to offer STUN/TURN service: [fe80::36c3:e421:3e1f:67f6]:3478 (udp)
+2026-11-12 00:23:30.545486-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'sr_group'
+2026-11-12 00:23:30.549190-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'sr_user'
+2026-11-12 00:23:30.569214-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'muc_room'
+2026-11-12 00:23:30.572608-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'muc_registered'
+2026-11-12 00:23:30.575634-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'muc_online_room'
+2026-11-12 00:23:30.578923-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'private_storage'
+2026-11-12 00:23:30.589132-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'privacy'
+2026-11-12 00:23:30.604991-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'vcard'
+2026-11-12 00:23:30.608228-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'vcard_search'
+2026-11-12 00:23:30.625430-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'bosh'
+2026-11-12 00:23:30.628399-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'push_session'
+2026-11-12 00:23:30.638501-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'last_activity'
+2026-11-12 00:23:30.649167-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'mqtt_pub'
+2026-11-12 00:23:30.656464-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'mqtt_session'
+2026-11-12 00:23:30.659521-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'mqtt_sub'
+2026-11-12 00:23:30.669031-05:00 [info] <0.603.0>@mod_mqtt:init_topic_cache/2:644 Building MQTT cache for localhost, this may take a while
+2026-11-12 00:23:30.671816-05:00 [warning] <0.621.0>@ejabberd_captcha:get_prog_name/0:444 The option captcha_cmd is not configured, but some module wants to use the CAPTCHA feature.
+2026-11-12 00:23:30.674728-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'passwd'
+2026-11-12 00:23:30.677552-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'reg_users_counter'
+2026-11-12 00:23:30.688642-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'oauth_token'
+2026-11-12 00:23:30.692115-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'oauth_client'
+2026-11-12 00:23:30.713620-05:00 [info] <0.123.0>@ejabberd_cluster_mnesia:wait_for_sync/1:123 Waiting for Mnesia synchronization to complete
+2026-11-12 00:23:30.736805-05:00 [warning] <0.355.0>@ejabberd_pkix:log_warnings/1:393 Invalid certificate in /etc/ejabberd/ejabberd.pem: at line 29: self-signed certificate
+2026-11-12 00:23:30.770233-05:00 [warning] <0.355.0>@ejabberd_pkix:check_domain_certfiles/1:312 No certificate found matching localhost
+2026-11-12 00:23:30.770471-05:00 [warning] <0.355.0>@ejabberd_pkix:check_domain_certfiles/1:312 No certificate found matching pubsub.localhost
+2026-11-12 00:23:30.770584-05:00 [warning] <0.355.0>@ejabberd_pkix:check_domain_certfiles/1:312 No certificate found matching conference.localhost
+2026-11-12 00:23:30.771960-05:00 [info] <0.123.0>@ejabberd_app:start/2:63 ejabberd 23.10-1 is started in the node ejabberd@localhost in 1.08s
+2026-11-12 00:23:30.772314-05:00 [info] <0.351.0>@ejabberd_listener:init/4:163 Start accepting TLS connections at [::]:5443 for ejabberd_http
+2026-11-12 00:23:30.772326-05:00 [info] <0.352.0>@ejabberd_listener:init/4:163 Start accepting TLS connections at [::]:5280 for ejabberd_http
+2026-11-12 00:23:30.772492-05:00 [info] <0.353.0>@ejabberd_listener:init/4:129 Start accepting UDP connections at [::]:3478 for ejabberd_stun
+2026-11-12 00:23:30.772454-05:00 [info] <0.348.0>@ejabberd_listener:init/4:163 Start accepting TCP connections at [::]:5222 for ejabberd_c2s
+2026-11-12 00:23:30.772360-05:00 [info] <0.354.0>@ejabberd_listener:init/4:163 Start accepting TCP connections at [::]:1883 for mod_mqtt
+2026-11-12 00:23:30.772536-05:00 [info] <0.350.0>@ejabberd_listener:init/4:163 Start accepting TCP connections at [::]:5269 for ejabberd_s2s_in
+2026-11-12 00:23:30.772462-05:00 [info] <0.349.0>@ejabberd_listener:init/4:163 Start accepting TLS connections at [::]:5223 for ejabberd_c2s
+2026-11-12 00:23:30.915186-05:00 [warning] <0.353.0>@ejabberd_stun:prepare_turn_opts/2:115 Option 'turn_ipv4_address' is undefined and the server's hostname doesn't resolve to a public IPv4 address, most likely the TURN relay won't be working properly
+2026-11-12 00:25:09.054604-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.708.0>) Accepted connection [::ffff:127.0.0.1]:59916 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:27:27.863158-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.720.0>) Accepted connection [::ffff:127.0.0.1]:47796 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:29:19.810689-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.722.0>) Accepted connection [::ffff:127.0.0.1]:40616 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:31:13.718872-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.725.0>) Accepted connection [::ffff:127.0.0.1]:57142 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:39:36.757372-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.733.0>) Accepted connection [::ffff:127.0.0.1]:51954 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:41:34.308368-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.735.0>) Accepted connection [::ffff:127.0.0.1]:37190 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:51:07.657200-05:00 [info] <0.350.0>@ejabberd_listener:accept/7:344 (<0.744.0>) Accepted connection [::ffff:127.0.0.1]:38278 -> [::ffff:127.0.0.1]:5269
+2026-11-12 00:51:07.657559-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.745.0>) Accepted connection [::ffff:127.0.0.1]:54556 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:51:07.658439-05:00 [info] <0.351.0>@ejabberd_listener:accept/7:344 (<0.746.0>) Accepted connection [::ffff:127.0.0.1]:52150 -> [::ffff:127.0.0.1]:5443
+2026-11-12 00:51:07.658996-05:00 [info] <0.352.0>@ejabberd_listener:accept/7:344 (<0.747.0>) Accepted connection [::ffff:127.0.0.1]:43856 -> [::ffff:127.0.0.1]:5280
+2026-11-12 00:51:07.732322-05:00 [info] <0.349.0>@ejabberd_listener:accept/7:344 (<0.748.0>) Accepted connection [::ffff:127.0.0.1]:44758 -> [::ffff:127.0.0.1]:5223
+2026-11-12 00:51:07.746139-05:00 [info] <0.354.0>@ejabberd_listener:accept/7:344 (<0.749.0>) Accepted connection [::ffff:127.0.0.1]:50188 -> [::ffff:127.0.0.1]:1883
+2026-11-12 00:51:13.398954-05:00 [warning] <0.749.0>@mod_mqtt_session:log_disconnection/2:1441 Rejected MQTT connection from ::ffff:127.0.0.1: Authentication failed: Not authorized
+2026-11-12 00:51:13.413842-05:00 [info] <0.744.0>@ejabberd_s2s_in:process_closed/2:132 Closing inbound s2s connection ::ffff:127.0.0.1 -> localhost: Stream closed by local host: syntax error (not-well-formed)
+2026-11-12 00:51:13.424481-05:00 [info] <0.352.0>@ejabberd_listener:accept/7:344 (<0.750.0>) Accepted connection [::ffff:127.0.0.1]:43862 -> [::ffff:127.0.0.1]:5280
+2026-11-12 00:51:13.425375-05:00 [info] <0.351.0>@ejabberd_listener:accept/7:344 (<0.751.0>) Accepted connection [::ffff:127.0.0.1]:52152 -> [::ffff:127.0.0.1]:5443
+2026-11-12 00:51:13.426260-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.752.0>) Accepted connection [::ffff:127.0.0.1]:54570 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:51:13.426926-05:00 [info] <0.350.0>@ejabberd_listener:accept/7:344 (<0.753.0>) Accepted connection [::ffff:127.0.0.1]:38284 -> [::ffff:127.0.0.1]:5269
+2026-11-12 00:51:18.128288-05:00 [info] <0.753.0>@ejabberd_s2s_in:process_closed/2:132 Closing inbound s2s connection ::ffff:127.0.0.1 -> localhost: Connection failed: connection closed
+2026-11-12 00:51:18.136156-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.754.0>) Accepted connection [::ffff:127.0.0.1]:38344 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:51:18.137872-05:00 [info] <0.354.0>@ejabberd_listener:accept/7:344 (<0.755.0>) Accepted connection [::ffff:127.0.0.1]:36202 -> [::ffff:127.0.0.1]:1883
+2026-11-12 00:51:18.140224-05:00 [info] <0.350.0>@ejabberd_listener:accept/7:344 (<0.756.0>) Accepted connection [::ffff:127.0.0.1]:46504 -> [::ffff:127.0.0.1]:5269
+2026-11-12 00:51:18.143817-05:00 [info] <0.756.0>@ejabberd_s2s_in:process_closed/2:132 Closing inbound s2s connection ::ffff:127.0.0.1 -> localhost: Stream closed by local host: Bad value of attribute 'to' in tag <stream:stream/> qualified by namespace 'jabber:server' (invalid-xml)
+2026-11-12 00:51:18.143852-05:00 [warning] <0.755.0>@mod_mqtt_session:log_disconnection/2:1441 Rejected MQTT connection from ::ffff:127.0.0.1: Authentication failed: Not authorized
+2026-11-12 00:51:18.148035-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.757.0>) Accepted connection [::ffff:127.0.0.1]:38350 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:51:18.148893-05:00 [info] <0.350.0>@ejabberd_listener:accept/7:344 (<0.758.0>) Accepted connection [::ffff:127.0.0.1]:46518 -> [::ffff:127.0.0.1]:5269
+2026-11-12 00:51:18.152329-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.759.0>) Accepted connection [::ffff:127.0.0.1]:38352 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:51:18.152750-05:00 [info] <0.350.0>@ejabberd_listener:accept/7:344 (<0.760.0>) Accepted connection [::ffff:127.0.0.1]:46534 -> [::ffff:127.0.0.1]:5269
+2026-11-12 00:51:18.153184-05:00 [info] <0.758.0>@ejabberd_s2s_in:process_closed/2:132 Closing inbound s2s connection ::ffff:127.0.0.1 -> localhost: Connection failed: connection closed
+2026-11-12 00:51:18.276572-05:00 [info] <0.760.0>@ejabberd_s2s_in:process_closed/2:132 Closing inbound s2s connection ::ffff:127.0.0.1 -> localhost: Connection failed: connection closed
+2026-11-12 00:51:18.291396-05:00 [info] <0.350.0>@ejabberd_listener:accept/7:344 (<0.761.0>) Accepted connection [::ffff:127.0.0.1]:46536 -> [::ffff:127.0.0.1]:5269
+2026-11-12 00:51:18.292532-05:00 [info] <0.352.0>@ejabberd_listener:accept/7:344 (<0.762.0>) Accepted connection [::ffff:127.0.0.1]:41304 -> [::ffff:127.0.0.1]:5280
+2026-11-12 00:51:18.292806-05:00 [info] <0.351.0>@ejabberd_listener:accept/7:344 (<0.763.0>) Accepted connection [::ffff:127.0.0.1]:57386 -> [::ffff:127.0.0.1]:5443
+2026-11-12 00:51:18.293645-05:00 [info] <0.761.0>@ejabberd_s2s_in:process_closed/2:132 Closing inbound s2s connection ::ffff:127.0.0.1 -> localhost: Stream closed by local host: not well-formed (invalid token) (not-well-formed)
+2026-11-12 00:51:18.293712-05:00 [info] <0.349.0>@ejabberd_listener:accept/7:344 (<0.764.0>) Accepted connection [::ffff:127.0.0.1]:43266 -> [::ffff:127.0.0.1]:5223
+2026-11-12 00:51:18.295269-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.765.0>) Accepted connection [::ffff:127.0.0.1]:38362 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.719514-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.767.0>) Accepted connection [::ffff:127.0.0.1]:43748 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.740397-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.768.0>) Accepted connection [::ffff:127.0.0.1]:43764 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.746890-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.769.0>) Accepted connection [::ffff:127.0.0.1]:43770 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.748427-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.770.0>) Accepted connection [::ffff:127.0.0.1]:43772 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.749177-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.771.0>) Accepted connection [::ffff:127.0.0.1]:43788 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.750823-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.772.0>) Accepted connection [::ffff:127.0.0.1]:43798 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.753431-05:00 [warning] <0.769.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.769.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.754783-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.773.0>) Accepted connection [::ffff:127.0.0.1]:43814 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.756175-05:00 [warning] <0.770.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.770.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.760714-05:00 [warning] <0.772.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.772.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A00018C:SSL routines::version too low
+2026-11-12 00:52:24.761112-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.774.0>) Accepted connection [::ffff:127.0.0.1]:43822 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.761515-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.775.0>) Accepted connection [::ffff:127.0.0.1]:43826 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.765506-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.776.0>) Accepted connection [::ffff:127.0.0.1]:43830 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.765993-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.777.0>) Accepted connection [::ffff:127.0.0.1]:43840 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.768424-05:00 [warning] <0.774.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.774.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.768455-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.778.0>) Accepted connection [::ffff:127.0.0.1]:43854 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.770399-05:00 [warning] <0.775.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.775.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.774730-05:00 [warning] <0.777.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.777.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A00018C:SSL routines::version too low
+2026-11-12 00:52:24.774856-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.779.0>) Accepted connection [::ffff:127.0.0.1]:43868 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.775150-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.780.0>) Accepted connection [::ffff:127.0.0.1]:43876 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.778156-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.781.0>) Accepted connection [::ffff:127.0.0.1]:43890 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.779703-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.782.0>) Accepted connection [::ffff:127.0.0.1]:43898 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.781670-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.783.0>) Accepted connection [::ffff:127.0.0.1]:43908 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.782315-05:00 [warning] <0.779.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.779.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.785159-05:00 [warning] <0.780.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.780.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.787552-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.784.0>) Accepted connection [::ffff:127.0.0.1]:43922 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.788234-05:00 [warning] <0.782.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.782.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A00018C:SSL routines::version too low
+2026-11-12 00:52:24.790643-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.785.0>) Accepted connection [::ffff:127.0.0.1]:43934 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.794631-05:00 [warning] <0.783.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.783.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:24.795779-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.786.0>) Accepted connection [::ffff:127.0.0.1]:43946 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.797736-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.787.0>) Accepted connection [::ffff:127.0.0.1]:43956 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.799318-05:00 [warning] <0.784.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.784.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.799272-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.788.0>) Accepted connection [::ffff:127.0.0.1]:43966 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.801304-05:00 [warning] <0.785.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.785.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.803257-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.789.0>) Accepted connection [::ffff:127.0.0.1]:43980 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.804970-05:00 [warning] <0.787.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.787.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A00018C:SSL routines::version too low
+2026-11-12 00:52:24.805542-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.790.0>) Accepted connection [::ffff:127.0.0.1]:43982 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.809756-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.791.0>) Accepted connection [::ffff:127.0.0.1]:43992 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.811391-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.792.0>) Accepted connection [::ffff:127.0.0.1]:44008 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.812642-05:00 [warning] <0.789.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.789.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.813473-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.793.0>) Accepted connection [::ffff:127.0.0.1]:44018 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.815107-05:00 [warning] <0.790.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.790.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.820209-05:00 [warning] <0.792.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.792.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A00018C:SSL routines::version too low
+2026-11-12 00:52:24.820455-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.794.0>) Accepted connection [::ffff:127.0.0.1]:44028 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.820769-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.795.0>) Accepted connection [::ffff:127.0.0.1]:44036 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.824500-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.796.0>) Accepted connection [::ffff:127.0.0.1]:44044 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.826745-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.797.0>) Accepted connection [::ffff:127.0.0.1]:44054 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.827100-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.798.0>) Accepted connection [::ffff:127.0.0.1]:44066 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.827559-05:00 [warning] <0.794.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.794.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.831062-05:00 [warning] <0.795.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.795.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A000102:SSL routines::unsupported protocol
+2026-11-12 00:52:24.833069-05:00 [warning] <0.797.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.797.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A00018C:SSL routines::version too low
+2026-11-12 00:52:24.837954-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.799.0>) Accepted connection [::ffff:127.0.0.1]:44082 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.840161-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.800.0>) Accepted connection [::ffff:127.0.0.1]:44092 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.847917-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.801.0>) Accepted connection [::ffff:127.0.0.1]:44094 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.849539-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.802.0>) Accepted connection [::ffff:127.0.0.1]:44100 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.851100-05:00 [warning] <0.801.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.801.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:24.854712-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.803.0>) Accepted connection [::ffff:127.0.0.1]:44110 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.864978-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.804.0>) Accepted connection [::ffff:127.0.0.1]:44126 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.874134-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.805.0>) Accepted connection [::ffff:127.0.0.1]:44140 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.884790-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.806.0>) Accepted connection [::ffff:127.0.0.1]:44156 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.894183-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.807.0>) Accepted connection [::ffff:127.0.0.1]:44168 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.902914-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.808.0>) Accepted connection [::ffff:127.0.0.1]:44176 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.913142-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.809.0>) Accepted connection [::ffff:127.0.0.1]:44184 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.921627-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.810.0>) Accepted connection [::ffff:127.0.0.1]:44190 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.930472-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.811.0>) Accepted connection [::ffff:127.0.0.1]:44204 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.940903-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.812.0>) Accepted connection [::ffff:127.0.0.1]:44216 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.949162-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.813.0>) Accepted connection [::ffff:127.0.0.1]:44228 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.951754-05:00 [warning] <0.813.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.813.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:24.954824-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.814.0>) Accepted connection [::ffff:127.0.0.1]:44236 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.961634-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.815.0>) Accepted connection [::ffff:127.0.0.1]:44242 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:24.991859-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.816.0>) Accepted connection [::ffff:127.0.0.1]:44246 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.022103-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.817.0>) Accepted connection [::ffff:127.0.0.1]:44250 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.025134-05:00 [warning] <0.817.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.817.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:25.028211-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.818.0>) Accepted connection [::ffff:127.0.0.1]:44260 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.035806-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.819.0>) Accepted connection [::ffff:127.0.0.1]:44262 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.052321-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.820.0>) Accepted connection [::ffff:127.0.0.1]:44264 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.069810-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.821.0>) Accepted connection [::ffff:127.0.0.1]:44274 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.076655-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.822.0>) Accepted connection [::ffff:127.0.0.1]:44280 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.084453-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.823.0>) Accepted connection [::ffff:127.0.0.1]:44296 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.092557-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.824.0>) Accepted connection [::ffff:127.0.0.1]:44308 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.114253-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.825.0>) Accepted connection [::ffff:127.0.0.1]:44312 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.121407-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.826.0>) Accepted connection [::ffff:127.0.0.1]:44314 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.125060-05:00 [warning] <0.826.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.826.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:25.127977-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.827.0>) Accepted connection [::ffff:127.0.0.1]:44324 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.130868-05:00 [warning] <0.827.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.827.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:25.134478-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.828.0>) Accepted connection [::ffff:127.0.0.1]:44340 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.142107-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.829.0>) Accepted connection [::ffff:127.0.0.1]:44354 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.149326-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.830.0>) Accepted connection [::ffff:127.0.0.1]:44356 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.177747-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.831.0>) Accepted connection [::ffff:127.0.0.1]:44364 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.183616-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.832.0>) Accepted connection [::ffff:127.0.0.1]:44374 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.206143-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.833.0>) Accepted connection [::ffff:127.0.0.1]:44382 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.212994-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.834.0>) Accepted connection [::ffff:127.0.0.1]:44392 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.220239-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.835.0>) Accepted connection [::ffff:127.0.0.1]:44396 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.226675-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.836.0>) Accepted connection [::ffff:127.0.0.1]:44408 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.233133-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.837.0>) Accepted connection [::ffff:127.0.0.1]:44424 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.238972-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.838.0>) Accepted connection [::ffff:127.0.0.1]:44438 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.246131-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.839.0>) Accepted connection [::ffff:127.0.0.1]:44442 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.253764-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.840.0>) Accepted connection [::ffff:127.0.0.1]:44458 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.259815-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.841.0>) Accepted connection [::ffff:127.0.0.1]:44472 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.265790-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.842.0>) Accepted connection [::ffff:127.0.0.1]:44480 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.271710-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.843.0>) Accepted connection [::ffff:127.0.0.1]:44482 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.277050-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.844.0>) Accepted connection [::ffff:127.0.0.1]:44488 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.280325-05:00 [warning] <0.844.0>@ejabberd_c2s:process_terminated/2:315 (tls|<0.844.0>) Failed to secure c2s connection: TLS failed: SSL_do_handshake failed: error:0A0000C1:SSL routines::no shared cipher
+2026-11-12 00:52:25.282903-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.845.0>) Accepted connection [::ffff:127.0.0.1]:44498 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.289349-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.846.0>) Accepted connection [::ffff:127.0.0.1]:44504 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.303512-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.847.0>) Accepted connection [::ffff:127.0.0.1]:44508 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.329631-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.848.0>) Accepted connection [::ffff:127.0.0.1]:44516 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.336357-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.849.0>) Accepted connection [::ffff:127.0.0.1]:44520 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.344788-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.850.0>) Accepted connection [::ffff:127.0.0.1]:44534 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.351341-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.851.0>) Accepted connection [::ffff:127.0.0.1]:44538 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.360093-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.852.0>) Accepted connection [::ffff:127.0.0.1]:44550 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.369548-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.853.0>) Accepted connection [::ffff:127.0.0.1]:44554 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.379563-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.854.0>) Accepted connection [::ffff:127.0.0.1]:44570 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.393789-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.855.0>) Accepted connection [::ffff:127.0.0.1]:44586 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.402898-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.856.0>) Accepted connection [::ffff:127.0.0.1]:44590 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.423205-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.857.0>) Accepted connection [::ffff:127.0.0.1]:44606 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.431124-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.858.0>) Accepted connection [::ffff:127.0.0.1]:44614 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.438373-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.859.0>) Accepted connection [::ffff:127.0.0.1]:44628 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.446947-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.860.0>) Accepted connection [::ffff:127.0.0.1]:44634 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.454862-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.861.0>) Accepted connection [::ffff:127.0.0.1]:44648 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.463189-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.862.0>) Accepted connection [::ffff:127.0.0.1]:44654 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.490396-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.863.0>) Accepted connection [::ffff:127.0.0.1]:44666 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.496469-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.864.0>) Accepted connection [::ffff:127.0.0.1]:44674 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.502352-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.865.0>) Accepted connection [::ffff:127.0.0.1]:44682 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.507981-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.866.0>) Accepted connection [::ffff:127.0.0.1]:44688 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.514102-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.867.0>) Accepted connection [::ffff:127.0.0.1]:44698 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.519954-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.868.0>) Accepted connection [::ffff:127.0.0.1]:44708 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.534251-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.869.0>) Accepted connection [::ffff:127.0.0.1]:44710 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.539482-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.870.0>) Accepted connection [::ffff:127.0.0.1]:44726 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.565084-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.871.0>) Accepted connection [::ffff:127.0.0.1]:44736 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.572121-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.872.0>) Accepted connection [::ffff:127.0.0.1]:44750 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.580475-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.873.0>) Accepted connection [::ffff:127.0.0.1]:44764 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.589562-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.874.0>) Accepted connection [::ffff:127.0.0.1]:44776 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.614345-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.875.0>) Accepted connection [::ffff:127.0.0.1]:44784 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.622118-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.876.0>) Accepted connection [::ffff:127.0.0.1]:44786 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.630048-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.877.0>) Accepted connection [::ffff:127.0.0.1]:44792 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.656337-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.878.0>) Accepted connection [::ffff:127.0.0.1]:44794 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.664632-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.879.0>) Accepted connection [::ffff:127.0.0.1]:44802 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.671496-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.880.0>) Accepted connection [::ffff:127.0.0.1]:44804 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.679285-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.881.0>) Accepted connection [::ffff:127.0.0.1]:44820 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.687325-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.882.0>) Accepted connection [::ffff:127.0.0.1]:44822 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.695033-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.883.0>) Accepted connection [::ffff:127.0.0.1]:44824 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.703700-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.884.0>) Accepted connection [::ffff:127.0.0.1]:44836 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.710439-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.885.0>) Accepted connection [::ffff:127.0.0.1]:44842 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.717303-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.886.0>) Accepted connection [::ffff:127.0.0.1]:44846 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.722843-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.887.0>) Accepted connection [::ffff:127.0.0.1]:44862 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.728504-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.888.0>) Accepted connection [::ffff:127.0.0.1]:44866 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.735195-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.889.0>) Accepted connection [::ffff:127.0.0.1]:44872 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.741020-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.890.0>) Accepted connection [::ffff:127.0.0.1]:44884 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:52:25.765773-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.891.0>) Accepted connection [::ffff:127.0.0.1]:44896 -> [::ffff:127.0.0.1]:5222

@@ -1,0 +1,64 @@
+2026-11-12 00:23:29.914378-05:00 [info] <0.123.0>@ejabberd_config:load/1:82 Loading configuration from /etc/ejabberd/ejabberd.yml
+2026-11-12 00:23:30.036602-05:00 [warning] <0.123.0>@gen_mod:warn_soft_dep_fail/2:642 Module mod_mam is recommended for module mod_muc but is not found in the config
+2026-11-12 00:23:30.171761-05:00 [info] <0.123.0>@ejabberd_config:load/1:89 Configuration loaded successfully
+2026-11-12 00:23:30.283345-05:00 [info] <0.267.0>@ejabberd_systemd:maybe_start_timer/1:164 Watchdog notifications enabled
+2026-11-12 00:23:30.291412-05:00 [info] <0.270.0>@translate:load/2:127 Building language translation cache
+2026-11-12 00:23:30.393728-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'ejabberd_commands'
+2026-11-12 00:23:30.423080-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'route'
+2026-11-12 00:23:30.427135-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'route_multicast'
+2026-11-12 00:23:30.434118-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'session'
+2026-11-12 00:23:30.436610-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'session_counter'
+2026-11-12 00:23:30.442488-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 's2s'
+2026-11-12 00:23:30.444762-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'temporarily_blocked'
+2026-11-12 00:23:30.450648-05:00 [info] <0.266.0>@gen_mod:start_modules/0:141 Loading modules for localhost
+2026-11-12 00:23:30.451819-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'motd'
+2026-11-12 00:23:30.454546-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'motd_users'
+2026-11-12 00:23:30.462744-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'offline_msg'
+2026-11-12 00:23:30.481886-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'caps_features'
+2026-11-12 00:23:30.485413-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'pubsub_last_item'
+2026-11-12 00:23:30.488938-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_index'
+2026-11-12 00:23:30.493701-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_node'
+2026-11-12 00:23:30.496979-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_state'
+2026-11-12 00:23:30.499607-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'pubsub_item'
+2026-11-12 00:23:30.507113-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'pubsub_orphan'
+2026-11-12 00:23:30.511754-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'roster'
+2026-11-12 00:23:30.516529-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'roster_version'
+2026-11-12 00:23:30.539092-05:00 [info] <0.498.0>@mod_stun_disco:parse_listener/1:616 Going to offer STUN/TURN service: [fe80::36c3:e421:3e1f:67f6]:3478 (udp)
+2026-11-12 00:23:30.545486-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'sr_group'
+2026-11-12 00:23:30.549190-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'sr_user'
+2026-11-12 00:23:30.569214-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'muc_room'
+2026-11-12 00:23:30.572608-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'muc_registered'
+2026-11-12 00:23:30.575634-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'muc_online_room'
+2026-11-12 00:23:30.578923-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'private_storage'
+2026-11-12 00:23:30.589132-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'privacy'
+2026-11-12 00:23:30.604991-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'vcard'
+2026-11-12 00:23:30.608228-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'vcard_search'
+2026-11-12 00:23:30.625430-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'bosh'
+2026-11-12 00:23:30.628399-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'push_session'
+2026-11-12 00:23:30.638501-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'last_activity'
+2026-11-12 00:23:30.649167-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'mqtt_pub'
+2026-11-12 00:23:30.656464-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'mqtt_session'
+2026-11-12 00:23:30.659521-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'mqtt_sub'
+2026-11-12 00:23:30.669031-05:00 [info] <0.603.0>@mod_mqtt:init_topic_cache/2:644 Building MQTT cache for localhost, this may take a while
+2026-11-12 00:23:30.671816-05:00 [warning] <0.621.0>@ejabberd_captcha:get_prog_name/0:444 The option captcha_cmd is not configured, but some module wants to use the CAPTCHA feature.
+2026-11-12 00:23:30.674728-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'passwd'
+2026-11-12 00:23:30.677552-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia ram table 'reg_users_counter'
+2026-11-12 00:23:30.688642-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc_only table 'oauth_token'
+2026-11-12 00:23:30.692115-05:00 [info] <0.217.0>@ejabberd_mnesia:create/2:270 Creating Mnesia disc table 'oauth_client'
+2026-11-12 00:23:30.713620-05:00 [info] <0.123.0>@ejabberd_cluster_mnesia:wait_for_sync/1:123 Waiting for Mnesia synchronization to complete
+2026-11-12 00:23:30.736805-05:00 [warning] <0.355.0>@ejabberd_pkix:log_warnings/1:393 Invalid certificate in /etc/ejabberd/ejabberd.pem: at line 29: self-signed certificate
+2026-11-12 00:23:30.770233-05:00 [warning] <0.355.0>@ejabberd_pkix:check_domain_certfiles/1:312 No certificate found matching localhost
+2026-11-12 00:23:30.770471-05:00 [warning] <0.355.0>@ejabberd_pkix:check_domain_certfiles/1:312 No certificate found matching pubsub.localhost
+2026-11-12 00:23:30.770584-05:00 [warning] <0.355.0>@ejabberd_pkix:check_domain_certfiles/1:312 No certificate found matching conference.localhost
+2026-11-12 00:23:30.771960-05:00 [info] <0.123.0>@ejabberd_app:start/2:63 ejabberd 23.10-1 is started in the node ejabberd@localhost in 1.08s
+2026-11-12 00:23:30.772314-05:00 [info] <0.351.0>@ejabberd_listener:init/4:163 Start accepting TLS connections at [::]:5443 for ejabberd_http
+2026-11-12 00:23:30.772326-05:00 [info] <0.352.0>@ejabberd_listener:init/4:163 Start accepting TLS connections at [::]:5280 for ejabberd_http
+2026-11-12 00:23:30.772492-05:00 [info] <0.353.0>@ejabberd_listener:init/4:129 Start accepting UDP connections at [::]:3478 for ejabberd_stun
+2026-11-12 00:23:30.772454-05:00 [info] <0.348.0>@ejabberd_listener:init/4:163 Start accepting TCP connections at [::]:5222 for ejabberd_c2s
+2026-11-12 00:23:30.772360-05:00 [info] <0.354.0>@ejabberd_listener:init/4:163 Start accepting TCP connections at [::]:1883 for mod_mqtt
+2026-11-12 00:23:30.772536-05:00 [info] <0.350.0>@ejabberd_listener:init/4:163 Start accepting TCP connections at [::]:5269 for ejabberd_s2s_in
+2026-11-12 00:23:30.772462-05:00 [info] <0.349.0>@ejabberd_listener:init/4:163 Start accepting TLS connections at [::]:5223 for ejabberd_c2s
+2026-11-12 00:23:30.915186-05:00 [warning] <0.353.0>@ejabberd_stun:prepare_turn_opts/2:115 Option 'turn_ipv4_address' is undefined and the server's hostname doesn't resolve to a public IPv4 address, most likely the TURN relay won't be working properly
+2026-11-12 00:25:09.054604-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.708.0>) Accepted connection [::ffff:127.0.0.1]:59916 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:27:27.863158-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.720.0>) Accepted connection [::ffff:127.0.0.1]:47796 -> [::ffff:127.0.0.1]:5222
+2026-11-12 00:29:19.810689-05:00 [info] <0.348.0>@ejabberd_listener:accept/7:344 (<0.722.0>) Accepted connection [::ffff:127.0.0.1]:40616 -> [::ffff:127.0.0.1]:5222

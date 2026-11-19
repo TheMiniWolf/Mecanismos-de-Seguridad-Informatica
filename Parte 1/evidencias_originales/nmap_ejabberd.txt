@@ -1,0 +1,32 @@
+# Nmap 7.993 scan initiated Thu Nov 12 00:51:04 2026 as: "C:\\Program Files (x86)\\Nmap\\nmap.exe" -sV -p 5222,5223,5269,5280,5443,1883 -oN C:\\Taller2\\evidencias_originales\\nmap_ejabberd.txt 127.0.0.1
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.00051s latency).
+
+PORT     STATE SERVICE      VERSION
+1883/tcp open  mqtt
+5222/tcp open  xmpp-client?
+5223/tcp open  hpvirtgrp?
+5269/tcp open  xmpp-server?
+5280/tcp open  xmpp-bosh?
+5443/tcp open  spss?
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at https://nmap.org/cgi-bin/submit.cgi?new-service :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5222-TCP:V=7.993%I=7%D=11/12%Time=6AF553D0%P=i686-pc-windows-window
+SF:s%r(GetRequest,15E,"<\?xml\x20version='1\.0'\?><stream:stream\x20id='15
+SF:511965716377389569'\x20version='1\.0'\x20xml:lang='en'\x20xmlns:stream=
+SF:'http://etherx\.jabber\.org/streams'\x20xmlns='jabber:client'><stream:e
+SF:rror><not-well-formed\x20xmlns='urn:ietf:params:xml:ns:xmpp-streams'/><
+SF:text\x20xml:lang='en'\x20xmlns='urn:ietf:params:xml:ns:xmpp-streams'>sy
+SF:ntax\x20error</text></stream:error></stream:stream>");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port5269-TCP:V=7.993%I=7%D=11/12%Time=6AF553D0%P=i686-pc-windows-window
+SF:s%r(GetRequest,17F,"<\?xml\x20version='1\.0'\?><stream:stream\x20id='18
+SF:33067268856393914'\x20version='1\.0'\x20xml:lang='en'\x20xmlns:db='jabb
+SF:er:server:dialback'\x20xmlns:stream='http://etherx\.jabber\.org/streams
+SF:'\x20xmlns='jabber:server'><stream:error><not-well-formed\x20xmlns='urn
+SF::ietf:params:xml:ns:xmpp-streams'/><text\x20xml:lang='en'\x20xmlns='urn
+SF::ietf:params:xml:ns:xmpp-streams'>syntax\x20error</text></stream:error>
+SF:</stream:stream>");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Nov 12 00:51:17 2026 -- 1 IP address (1 host up) scanned in 13.05 seconds

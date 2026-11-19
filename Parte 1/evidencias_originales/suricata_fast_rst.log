@@ -1,0 +1,5 @@
+11/08/2025-20:02:12.030000  [**] [1:9000005:1] T2 Caso5 rafaga de RST del servidor [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.50.20:80 -> 192.168.50.103:59290
+11/08/2025-20:02:28.830000  [**] [1:9000005:1] T2 Caso5 rafaga de RST del servidor [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.50.20:80 -> 192.168.50.103:58221
+11/08/2025-20:02:07.230000  [**] [1:9000005:1] T2 Caso5 rafaga de RST del servidor [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.50.20:80 -> 192.168.50.103:47797
+11/08/2025-20:02:01.230000  [**] [1:9000005:1] T2 Caso5 rafaga de RST del servidor [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.50.20:80 -> 192.168.50.103:54242
+11/08/2025-20:02:14.430000  [**] [1:9000005:1] T2 Caso5 rafaga de RST del servidor [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.50.20:80 -> 192.168.50.103:48350

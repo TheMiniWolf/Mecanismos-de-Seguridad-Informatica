@@ -1,0 +1,9 @@
+11/08/2025-20:02:09.913611  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:51549 -> 192.168.50.53:53
+11/08/2025-20:02:03.568058  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:48708 -> 192.168.50.53:53
+11/08/2025-20:02:39.600035  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:56484 -> 192.168.50.53:53
+11/08/2025-20:02:34.302612  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:44330 -> 192.168.50.53:53
+11/08/2025-20:03:13.992985  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:50108 -> 192.168.50.53:53
+11/08/2025-20:02:52.364119  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:45776 -> 192.168.50.53:53
+11/08/2025-20:03:00.488475  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:41547 -> 192.168.50.53:53
+11/08/2025-20:03:42.617407  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:57244 -> 192.168.50.53:53
+11/08/2025-20:03:43.050611  [**] [1:9000002:1] T2 Caso2 consulta DNS con nombre largo [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 192.168.50.105:47315 -> 192.168.50.53:53

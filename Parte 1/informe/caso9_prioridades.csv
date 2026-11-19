@@ -1,0 +1,6 @@
+host,eventos,tipos,fuentes,puntuacion,prioridad
+192.168.50.105,1243,"escaneo_puertos, dns_nombre_largo",2,80,ALTA
+192.168.50.20,29970,syn_sin_handshake,1,35,MEDIA
+192.168.50.110,3001,respuesta_sin_peticion,1,35,MEDIA
+192.168.50.104,122,icmp_payload_grande,1,25,MEDIA
+192.168.50.103,25,rst_servidor,1,15,BAJA

@@ -1,0 +1,12 @@
+11/08/2025-20:02:09.016318  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:02:18.916912  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:02:28.730723  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:02:38.628801  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:02:48.852517  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:02:58.770857  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:03:09.530469  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:03:19.245213  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:03:29.145993  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:03:39.174664  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:03:49.130504  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
+11/08/2025-20:03:58.916527  [**] [1:9000007:1] T2 Caso7 ICMP echo grande [**] [Classification: Potentially Bad Traffic] [Priority: 2] {ICMP} 192.168.50.104:8 -> 192.168.50.20:0
